@@ -1,3 +1,4 @@
+import { trpc } from "@/app/utils/trpc";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,9 +7,13 @@ export const metadata: Metadata = {
 };
 
 export default function VideoPage() {
+  const hello = trpc.hello.useQuery({ text: "client" });
+  if (!hello.data) {
+    return <div>Loading...</div>;
+  }
   return (
     <div>
-      <span className="text-7xl">Video Page</span>
+      <p>{hello.data.greeting}</p>
     </div>
   );
 }
