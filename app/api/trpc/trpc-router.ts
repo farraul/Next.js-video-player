@@ -1,6 +1,7 @@
+import videoRouter from "@/server/video-route";
 import { t } from "@/utils/trpc-server";
 
-export const appRouter = t.router({
+const healthCheckerRouter = t.router({
   healthchecker: t.procedure.query(({ ctx }) => {
     return {
       status: "success",
@@ -8,5 +9,7 @@ export const appRouter = t.router({
     };
   }),
 });
+
+export const appRouter = t.mergeRouters(videoRouter, healthCheckerRouter);
 
 export type AppRouter = typeof appRouter;

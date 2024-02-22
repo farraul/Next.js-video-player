@@ -1,0 +1,16 @@
+{
+  "videos": [
+    {
+      "title": "Next",
+      "description": "Video del framework Next",
+      "url": "https://www.youtube.com/embed/GowPe3iiqTs?si=89c36CqWe3JDMMay&autoplay=1",
+      "id": "GowPe3iiqTs"
+    },
+    {
+      "title": "Astro",
+      "description": "Video del framework Astro",
+      "url": "https://www.youtube.com/embed/rRxuVOutmFQ?si=sX3m20Qdxkb78-II&autoplay=1",
+      "id": "rRxuVOutmFQ"
+    }
+  ]
+}
