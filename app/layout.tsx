@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Nunito } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components";
+import { TrpcProvider } from "@/utils/trpc-provider";
 
-const inter = Nunito({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -12,14 +12,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="es">
+    <html lang="en">
       <body className={inter.className}>
-        <Navbar />
-        {children}
+        <TrpcProvider>
+          <div>{children}</div>
+        </TrpcProvider>
       </body>
     </html>
   );

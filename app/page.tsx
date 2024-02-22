@@ -1,19 +1,15 @@
-import Link from "next/link";
-// import { trpc } from "../utils/trpc";
+"use client";
 
-export default function HomePage() {
-  // const hello = trpc.hello.useQuery({ text: "client" });
-  // if (!hello.data) {
-  //   return <div>Loading...</div>;
-  // }
+import { trpc } from "@/utils/trpc";
+
+export default function Home() {
+  let { data, isLoading, isFetching } = trpc.healthchecker.useQuery();
+  if (isLoading || isFetching) return <p>Loading...</p>;
 
   return (
-    <article>
-      <main className="flex flex-col items-center p-24">
-        <span className="text-5xl">Hola Mundo</span>
-
-        <Link href={"/about"}>About Page</Link>
-      </main>
-    </article>
+    <div className="text-xl font-bold">
+      <h1>Status: {data?.status}</h1>
+      <h1>Message: {data?.message}</h1>
+    </div>
   );
 }
