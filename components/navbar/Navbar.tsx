@@ -8,7 +8,7 @@ const navItems = [
 
 export const Navbar = () => {
   return (
-    <nav className="flex bg-blue-900 text-white p-2 m-2 ronded px-8 text-lg">
+    <nav className="flex bg-blue-900 p-2 px-8 text-lg">
       <Link href={"/"} className="flex items-center">
         <span>Home</span>
       </Link>
