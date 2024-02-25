@@ -14,6 +14,7 @@ import heart from "react-useanimations/lib/heart";
 import { trpc } from "@/utils/trpc";
 import ReactPlayer from "react-player";
 import { PlayList } from "@/components/PlayList";
+import { useFetch } from "@/hooks/useFetch";
 
 export default function Page() {
   const [videoSelected, setVideoSelected] = useState<Video>();
@@ -21,6 +22,14 @@ export default function Page() {
   const [progress, setProgress] = useState(0);
   let { data, refetch } = trpc.getVideos.useQuery();
   const likes = trpc.setLikes.useMutation();
+
+  const { call, loading } = useFetch(async () => {
+    if (videoSelected) {
+      likes.mutate({ id: videoSelected.id });
+      setChecked(!checked);
+      refetch();
+    }
+  });
 
   return (
     <article className="flex justify-center">
@@ -56,14 +65,9 @@ export default function Page() {
                   <div>{videoSelected?.description}</div>
                   <div className=" flex items-center">
                     {videoSelected && <span>{videoSelected.likes}</span>}
-                    <button
-                      onClick={() => {
-                        if (videoSelected)
-                          likes.mutate({ id: videoSelected.id });
-                        setChecked(!checked);
-                        refetch();
-                      }}
-                    >
+
+                    {loading && <>Mensaje enviado</>}
+                    <button onClick={call}>
                       <span className="text-3xl ml-2">❤️</span>
                     </button>
                   </div>
