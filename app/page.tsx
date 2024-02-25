@@ -11,7 +11,6 @@ import { useState } from "react";
 import { Progress } from "@/components/ui/progress";
 import UseAnimations from "react-useanimations";
 import heart from "react-useanimations/lib/heart";
-
 import { trpc } from "@/utils/trpc";
 import ReactPlayer from "react-player";
 import { PlayList } from "@/components/PlayList";
@@ -26,7 +25,7 @@ export default function Page() {
   return (
     <article className="flex justify-center">
       <section className="w-full justify-center max-w-7xl ">
-        <div className="flex justify-between flex-col ">
+        <div className="flex justify-between flex-col">
           {videoSelected ? (
             <Card className="w-full border-none mt-28 bg-transparent text-white">
               <CardHeader className="bg-gray-900">
@@ -53,7 +52,7 @@ export default function Page() {
                 />
               </CardContent>
               <CardFooter>
-                <CardDescription className="w-full  mt-10 flex flex-row justify-between">
+                <CardDescription className="w-full mt-10 flex flex-row justify-between">
                   <div>{videoSelected?.description}</div>
                   <div className=" flex items-center">
                     {videoSelected && <span>{videoSelected.likes}</span>}
@@ -65,14 +64,7 @@ export default function Page() {
                         refetch();
                       }}
                     >
-                      <UseAnimations
-                        animation={heart}
-                        size={40}
-                        fillColor="white"
-                        strokeColor="white"
-                        className="ml-2"
-                        reverse={checked}
-                      />
+                      <span className="text-3xl ml-2">❤️</span>
                     </button>
                   </div>
                 </CardDescription>
@@ -80,7 +72,7 @@ export default function Page() {
             </Card>
           ) : (
             <div className="text-center mt-52">
-              <h1 className="text-5xl ">Videoflix</h1>
+              <h1 className="text-5xl">Videoflix</h1>
               <p className="text-gray-500 mt-8">Selecciona video</p>
             </div>
           )}
