@@ -7,7 +7,6 @@ import { trpc } from "@/utils/trpc";
 
 export const PlayList = () => {
   const { setVideoSelected, playList, setPlaylist } = useVideoStore();
-
   let { data } = trpc.getVideos.useQuery();
 
   useEffect(() => {

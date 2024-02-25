@@ -9,7 +9,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useState } from "react";
-
 import { trpc } from "@/utils/trpc";
 import { useFetch } from "@/hooks/useFetch";
 import { timeOutPromise } from "@/utils/timeOutPromise";
@@ -21,7 +20,6 @@ export default function VideoPlayer() {
   const [progress, setProgress] = useState(0);
   let { refetch } = trpc.getVideos.useQuery();
   const likes = trpc.setLikes.useMutation();
-
   const { videoSelected } = useVideoStore();
 
   const { call, loading } = useFetch(async () => {
@@ -61,9 +59,8 @@ export default function VideoPlayer() {
             <CardDescription className="w-full mt-10 flex flex-row justify-between">
               <div>{videoSelected?.description}</div>
               <div className=" flex items-center">
-                {videoSelected && <span>{videoSelected.likes}</span>}
-
-                {loading && <>Mensaje enviado</>}
+                {loading && <>Gracias</>}
+                <span className=" ml-4">{videoSelected.likes}</span>
                 <button onClick={call}>
                   <span className="text-3xl ml-2">❤️</span>
                 </button>
