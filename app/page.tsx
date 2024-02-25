@@ -57,7 +57,7 @@ export default function Page() {
               />
             </CardContent>
             <CardFooter>
-              <CardDescription>
+              <CardDescription className="mt-4">
                 {videoSelected?.description || ""}
               </CardDescription>
             </CardFooter>
