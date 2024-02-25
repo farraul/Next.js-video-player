@@ -6,7 +6,6 @@ import { useState } from "react";
 import superjson from "superjson";
 import { trpc } from "./trpc";
 import queryClient from "./query-client";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 export const TrpcProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -37,10 +36,7 @@ export const TrpcProvider: React.FC<{ children: React.ReactNode }> = ({
   );
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
-      <QueryClientProvider client={queryClient}>
-        {children}
-        <ReactQueryDevtools />
-      </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </trpc.Provider>
   );
 };
