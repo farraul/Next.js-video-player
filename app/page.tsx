@@ -10,6 +10,8 @@ import {
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Progress } from "@/components/ui/progress";
+import UseAnimations from "react-useanimations";
+import heart from "react-useanimations/lib/heart";
 
 interface Video {
   title: string;
@@ -24,12 +26,10 @@ import ReactPlayer from "react-player";
 export default function Page() {
   const [videoSelected, setVideoSelected] = useState<Video>();
   const { data } = trpc.getVideos.useQuery();
-
+  const [checked, setChecked] = useState(true);
   const [progress, setProgress] = useState(0);
-  useEffect(() => {
-    const timer = setTimeout(() => setProgress(66), 100);
-    return () => clearTimeout(timer);
-  }, []);
+
+  const likes = trpc.setLikes.useMutation();
 
   return (
     <article className="flex justify-center">
@@ -57,8 +57,20 @@ export default function Page() {
               />
             </CardContent>
             <CardFooter>
-              <CardDescription className="mt-4">
-                {videoSelected?.description || ""}
+              <CardDescription className="w-full  mt-10 flex flex-row justify-between">
+                <div>{videoSelected?.description}</div>
+                <div>
+                  <UseAnimations
+                    animation={heart}
+                    size={50}
+                    fillColor="white"
+                    strokeColor="white"
+                    onClick={() => {
+                      if (videoSelected) likes.mutate({ id: videoSelected.id });
+                    }}
+                    reverse={checked}
+                  />
+                </div>
               </CardDescription>
             </CardFooter>
           </Card>
